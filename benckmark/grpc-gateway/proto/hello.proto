@@ -1,0 +1,22 @@
+syntax = "proto3";
+
+package hello;
+
+import "google/api/annotations.proto";
+
+option go_package = "proto;proto";
+
+service Hello {
+    rpc Say(SayRequest) returns (SayReply) {
+        option (google.api.http) = {
+            get: "/say"
+        };
+    }
+}
+
+message SayRequest {}
+
+message SayReply {
+  string sentence = 1;
+}
+
