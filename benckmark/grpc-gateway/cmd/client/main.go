@@ -15,7 +15,7 @@ import (
 
 func main() {
 	var (
-		grpcAddr    = flag.String("grpc", "127.0.0.1:9999", "grpc listen address")
+		grpcAddr    = flag.String("grpc", "127.0.0.1:10220", "grpc listen address")
 		concurrency = flag.Int("c", 1, "concurrency")
 		requests    = flag.Int("n", 1, "requests")
 	)
@@ -50,6 +50,7 @@ func main() {
 
 	cost := time.Now().Sub(before).Nanoseconds()
 	qps := (int64(*requests) * int64(time.Second/time.Nanosecond)) / cost
+	fmt.Printf("requests: %d\n", *requests)
 	fmt.Printf("cost: %dms\n", cost/int64(time.Millisecond))
 	fmt.Printf("qps: %d\n", qps)
 }

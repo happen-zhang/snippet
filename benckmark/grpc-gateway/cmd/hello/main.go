@@ -23,8 +23,8 @@ func (h *Hello) Say(ctx context.Context, req *pb.SayRequest) (*pb.SayReply, erro
 func main() {
 	var (
 		inProcess = flag.Bool("inprocess", false, "grpc-gateway in-process mode")
-		grpcAddr  = flag.String("grpc", ":9999", "grpc listen address")
-		httpAddr  = flag.String("http", ":8899", "http listen address")
+		grpcAddr  = flag.String("grpc", ":10220", "grpc listen address")
+		httpAddr  = flag.String("http", ":10221", "http listen address")
 	)
 	flag.Parse()
 
