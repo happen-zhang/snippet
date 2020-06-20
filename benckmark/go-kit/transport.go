@@ -4,6 +4,7 @@ import (
 	"context"
 	"fmt"
 	"net/http"
+	"strconv"
 
 	"github.com/go-kit/kit/endpoint"
 	grpctransport "github.com/go-kit/kit/transport/grpc"
@@ -40,8 +41,12 @@ func NewHTTPHandler(ep endpoint.Endpoint) http.Handler {
 	return http.DefaultServeMux
 }
 
-func decodeGRPCSayRequest(_ context.Context, _ interface{}) (interface{}, error) {
-	return nil, nil
+func decodeGRPCSayRequest(_ context.Context, request interface{}) (interface{}, error) {
+	req := request.(*pb.SayRequest)
+	return &SayRequest{
+		Word:   req.Word,
+		Repeat: req.RepeatCount,
+	}, nil
 }
 
 func encodeGRPCSayReply(_ context.Context, reply interface{}) (interface{}, error) {
@@ -51,12 +56,16 @@ func encodeGRPCSayReply(_ context.Context, reply interface{}) (interface{}, erro
 	}, nil
 }
 
-func decodeHTTPSayRequest(_ context.Context, _ *http.Request) (interface{}, error) {
-	// TODO convert
-	return nil, nil
+func decodeHTTPSayRequest(_ context.Context, request *http.Request) (interface{}, error) {
+	query := request.URL.Query()
+	repeat, _ := strconv.Atoi(query.Get("repeatCount"))
+	return &SayRequest{
+		Word:   query.Get("word"),
+		Repeat: int32(repeat),
+	}, nil
 }
 
 func encodeHTTPSayReponse(_ context.Context, w http.ResponseWriter, response interface{}) error {
-	fmt.Fprint(w, `{"sentence": "helloworld!"}`)
+	fmt.Fprint(w, `{"sentence": "hello, `+response.(string)+`!"}`)
 	return nil
 }

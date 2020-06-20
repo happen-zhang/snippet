@@ -7,6 +7,7 @@ import (
 	"log"
 	"net"
 	"net/http"
+	"strings"
 
 	"github.com/grpc-ecosystem/grpc-gateway/runtime"
 	"google.golang.org/grpc"
@@ -17,7 +18,11 @@ import (
 type Hello struct{}
 
 func (h *Hello) Say(ctx context.Context, req *pb.SayRequest) (*pb.SayReply, error) {
-	return &pb.SayReply{Sentence: "helloworld!"}, nil
+	word := req.Word
+	if req.RepeatCount > 1 && word != "" {
+		word = strings.Repeat(word, int(req.RepeatCount))
+	}
+	return &pb.SayReply{Sentence: "hello, " + word + "!"}, nil
 }
 
 func main() {

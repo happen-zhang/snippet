@@ -14,7 +14,10 @@ service Hello {
     }
 }
 
-message SayRequest {}
+message SayRequest {
+    string word = 1;
+    int32  repeat_count = 2;
+}
 
 message SayReply {
   string sentence = 1;
