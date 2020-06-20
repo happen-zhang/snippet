@@ -47,12 +47,12 @@ wrk -t8 -c100 -d1m "http://127.0.0.1:12221/say?word=world&repeatCount=10"
 
 ## 数据对比
 
--|平均<br/>(ms)|中位<br/>(ms)|最大<br/>(ms)|P90<br/>(ms)|P99<br/>(ms)|QPS
----|---|---|---|---|---|---|---
-go http |0.96|0.88|84.67|1.11|2.53|104314.83
-grpc-gateway-proxy |2.98|2.76|123.28|4.27|7.26|33853.49
-grpc-gateway-inprocess |1.58|0.89|158.46|3.26|8.50|80651.55
-go-kit http |1.03|0.87|113.41|1.22|2.89|106041.51
+| - | 平均(ms) | 中位(ms) | 最大(ms) | P90(ms) | P99(ms) | QPS |
+| --- | --- | --- | --- | --- | --- | --- |
+| go http | 0.96 | 0.88 | 84.67 | 1.11 | 2.53 | 104314.83 |
+| grpc-gateway-proxy | 2.98 | 2.76 | 123.28 | 4.27 | 7.26 | 33853.49 |
+| grpc-gateway-inprocess | 1.58 |0.89 | 158.46 | 3.26 | 8.50 | 80651.55 |
+| go-kit http | 1.03 | 0.87 | 113.41 | 1.22 | 2.89 | 106041.51 |
 
 上面的表格中可见，go http ≈ go-kit http > grpc-gateway-inprocess > grpc-gateway-proxy。
 
