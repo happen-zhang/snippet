@@ -33,7 +33,7 @@ wrk -t8 -c100 -d1m "http://127.0.0.1:12221/say?word=world&repeatCount=10"
 ```
 ./go-kit/bin/hello --http="11221"
 
-./grpc-gateway/bin/client -c 100 -n 100000 --word=world --repeat=10
+wrk -t8 -c100 -d1m "http://127.0.0.1:11221/say?word=world&repeatCount=10"
 ```
 
 ## 运行环境
