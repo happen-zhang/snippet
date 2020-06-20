@@ -4,5 +4,5 @@
 
 ## benchmark
 
-grpc、grpc-gateway、http、go-kit 性能测试。
+grpc-gateway、http、go-kit http 性能测试。
 
